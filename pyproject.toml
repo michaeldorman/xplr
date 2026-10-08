@@ -8,7 +8,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "xplr"
-version = "0.0.1"
+version = "0.0.3"
 authors = [
   { name="Michael Dorman", email="dorman@post.bgu.ac.il" },
 ]
