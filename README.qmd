@@ -14,14 +14,14 @@ The `xplr` package is aimed at quick visualization of Python objects in explorat
 
 The `plot` function has the following modes:
 
-| Group | Object | Plot type |
-|:---:|:---:|:---:|
-| Vector          | `ndarray` (1-dimensional) | Line plot |
-| Vector          | `Series`                  | Line plot |
-| Table           | `DataFrame`               | Line plot |
-| Matrix          | `ndarray` (2-dimensional) | Image     |
-| Geometry column | `GeoSeries`               | Map       |
-| Vector layer    | `GeoDataFrame`            | Map       |
+| Group | Object | Plot type | Mechanism |
+|:---:|:---:|:---:|:---:|
+| Vector          | `ndarray` (1-dimensional) | Line plot | `plt.plot`   |
+| Vector          | `Series`                  | Line plot | `.plot`      |
+| Table           | `DataFrame`               | Line plot | `.plot`      |
+| Matrix          | `ndarray` (2-dimensional) | Image     | `plt.imshow` |
+| Geometry column | `GeoSeries`               | Map       | `.plot`      |
+| Vector layer    | `GeoDataFrame`            | Map       | `.plot`      |
 
 The `view` function has the following modes:
 
@@ -58,19 +58,21 @@ pols = gpd.GeoSeries([
     shapely.geometry.Polygon([(3,3), (5,3), (5,5), (3,5)]),
 ])
 pols = gpd.GeoDataFrame({'geometry': pols, 'value': [1,2,2,3]})
-pols
+print(pols)
 ```
 
 Here is how we can plot it:
 
 ```{python}
+#| label: fig-plot-pols
 plot(pols)
 ```
 
 Additional arguments to the plotting method can be passed as follows:
 
 ```{python}
-plot(pols, 'value', color='none')
+#| label: fig-plot-pols-symbology
+plot(pols, column='value', edgecolor='black')
 ```
 
 `view` can be used to open the layer in an external program:
@@ -79,7 +81,7 @@ plot(pols, 'value', color='none')
 view(pols)
 ```
 
-The layer is exported to a temporary file, which is then opened in the default program (e.g., QGIS).
+The layer is exported to a temporary file, which is then opened in the default program (e.g., QGIS):
 
 ![The `pols` layer opened in QGIS](README_files/qgis.png)
 

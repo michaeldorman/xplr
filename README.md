@@ -14,14 +14,14 @@ exploratory data analysis. It has two functions:
 
 The `plot` function has the following modes:
 
-|      Group      |          Object           | Plot type |
-|:---------------:|:-------------------------:|:---------:|
-|     Vector      | `ndarray` (1-dimensional) | Line plot |
-|     Vector      |         `Series`          | Line plot |
-|      Table      |        `DataFrame`        | Line plot |
-|     Matrix      | `ndarray` (2-dimensional) |   Image   |
-| Geometry column |        `GeoSeries`        |    Map    |
-|  Vector layer   |      `GeoDataFrame`       |    Map    |
+|      Group      |          Object           | Plot type |  Mechanism   |
+|:---------------:|:-------------------------:|:---------:|:------------:|
+|     Vector      | `ndarray` (1-dimensional) | Line plot |  `plt.plot`  |
+|     Vector      |         `Series`          | Line plot |   `.plot`    |
+|      Table      |        `DataFrame`        | Line plot |   `.plot`    |
+|     Matrix      | `ndarray` (2-dimensional) |   Image   | `plt.imshow` |
+| Geometry column |        `GeoSeries`        |    Map    |   `.plot`    |
+|  Vector layer   |      `GeoDataFrame`       |    Map    |   `.plot`    |
 
 The `view` function has the following modes:
 
@@ -62,30 +62,14 @@ pols = gpd.GeoSeries([
     shapely.geometry.Polygon([(3,3), (5,3), (5,5), (3,5)]),
 ])
 pols = gpd.GeoDataFrame({'geometry': pols, 'value': [1,2,2,3]})
-pols
+print(pols)
 ```
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-&#10;    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-&#10;    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-
-|     | geometry                            | value |
-|-----|-------------------------------------|-------|
-| 0   | POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0)) | 1     |
-| 1   | POLYGON ((2 2, 4 2, 4 4, 2 4, 2 2)) | 2     |
-| 2   | POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1)) | 2     |
-| 3   | POLYGON ((3 3, 5 3, 5 5, 3 5, 3 3)) | 3     |
-
-</div>
+                                  geometry  value
+    0  POLYGON ((0 0, 2 0, 2 2, 0 2, 0 0))      1
+    1  POLYGON ((2 2, 4 2, 4 4, 2 4, 2 2))      2
+    2  POLYGON ((1 1, 3 1, 3 3, 1 3, 1 1))      2
+    3  POLYGON ((3 3, 5 3, 5 5, 3 5, 3 3))      3
 
 Here is how we can plot it:
 
@@ -93,18 +77,30 @@ Here is how we can plot it:
 plot(pols)
 ```
 
-![](README_files/figure-commonmark/cell-4-output-1.png)
+<div id="fig-plot-pols">
+
+<img src="https://raw.githubusercontent.com/michaeldorman/xplr/master/README_files/figure-commonmark/fig-plot-pols-output-1.png"
+id="fig-plot-pols" />
+
+Figure 1
+
+</div>
 
 Additional arguments to the plotting method can be passed as follows:
 
 ``` python
-plot(pols, 'value', color='none')
+plot(pols, column='value', edgecolor='black')
 ```
 
-    /home/michael/venv/m/lib/python3.14/site-packages/xplr/xplr.py:45: UserWarning: Only specify one of 'column' or 'color'. Using 'color'.
-      x.plot(legend=True, *args, **kwargs)
+<div id="fig-plot-pols-symbology">
 
-![](README_files/figure-commonmark/cell-5-output-2.png)
+<img
+src="https://raw.githubusercontent.com/michaeldorman/xplr/master/README_files/figure-commonmark/fig-plot-pols-symbology-output-1.png"
+id="fig-plot-pols-symbology" />
+
+Figure 2
+
+</div>
 
 `view` can be used to open the layer in an external program:
 
@@ -115,12 +111,12 @@ view(pols)
     /home/michael/venv/m/lib/python3.14/site-packages/pyogrio/geopandas.py:948: UserWarning: 'crs' was not provided.  The output dataset will not have projection information defined and may not be usable in other systems.
       write(
 
-    '/tmp/tmp4y8vh0nz.gpkg'
+    '/tmp/tmpt02mwagy.gpkg'
 
 The layer is exported to a temporary file, which is then opened in the
-default program (e.g., QGIS).
+default program (e.g., QGIS):
 
-![The `pols` layer opened in QGIS](README_files/qgis.png)
+![The `pols` layer opened in QGIS](https://raw.githubusercontent.com/michaeldorman/xplr/master/README_files/qgis.png)
 
 ## Import on startup
 
