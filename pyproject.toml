@@ -1,0 +1,28 @@
+[build-system]
+requires = [
+    "hatchling >= 1.26",
+    "geopandas >= 1.1.0",
+    "rasterio >= 1.4.0",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "xplr"
+version = "0.0.1"
+authors = [
+  { name="Michael Dorman", email="dorman@post.bgu.ac.il" },
+]
+description = "Quick visualization of Python objects for exploratory data analysis"
+readme = "README.md"
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/michaeldorman/xplr/"
+Issues = "https://github.com/michaeldorman/xplr/issues"
