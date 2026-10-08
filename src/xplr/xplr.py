@@ -1,4 +1,4 @@
-def open_file_with_default_app(file_path):
+def click(file_path):
     import os
     import platform
     import subprocess
@@ -81,14 +81,14 @@ def view(x) -> str:
         with tempfile.NamedTemporaryFile(suffix='.gpkg', delete=False) as tmp:
             tmp_path = tmp.name
         x.to_file(tmp_path, index=False)
-        open_file_with_default_app(tmp_path)
+        click(tmp_path)
         return tmp_path
     # Table
     if isinstance(x, pd.Series) or isinstance(x, pd.DataFrame):
         with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as tmp:
             tmp_path = tmp.name
         x.to_excel(tmp_path, index=False)
-        open_file_with_default_app(tmp_path)
+        click(tmp_path)
         return tmp_path
 
 
