@@ -85,9 +85,9 @@ def view(x) -> str:
         return tmp_path
     # Table
     if isinstance(x, pd.Series) or isinstance(x, pd.DataFrame):
-        with tempfile.NamedTemporaryFile(suffix='.xlsx', delete=False) as tmp:
+        with tempfile.NamedTemporaryFile(suffix='.csv', delete=False) as tmp:
             tmp_path = tmp.name
-        x.to_excel(tmp_path, index=False)
+        x.to_csv(tmp_path)
         click(tmp_path)
         return tmp_path
 
