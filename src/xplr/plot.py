@@ -24,6 +24,10 @@ def plot(x, *args, **kwargs):
     if isinstance(x, gpd.GeoSeries):
         x.plot(*args, **kwargs)
         return
+    # shapely
+    if isinstance(x, BaseGeometry):
+        gpd.GeoSeries(x).plot(*args, **kwargs)
+        return
     # DataFrame
     if isinstance(x, pd.DataFrame):
         x.plot(*args, **kwargs)
