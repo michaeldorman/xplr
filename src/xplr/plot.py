@@ -12,6 +12,7 @@ def plot(x, *args, **kwargs):
     """
     import matplotlib.pyplot as plt
     plt.ion()
+    import shapely
     import pandas as pd
     import geopandas as gpd
     import numpy as np
