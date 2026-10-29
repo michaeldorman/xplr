@@ -40,5 +40,9 @@ def plot(x, *args, **kwargs):
     if isinstance(x, np.ndarray) and x.ndim == 2:
         plt.imshow(x, *args, **kwargs)
         return
+    # Array 3d
+    if isinstance(x, np.ndarray) and x.ndim == 3:
+        plt.imshow(x[0], *args, **kwargs)
+        return
 
 
