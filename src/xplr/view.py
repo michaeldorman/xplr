@@ -4,6 +4,7 @@ def view(x) -> str:
     import tempfile
     import pandas as pd
     import geopandas as gpd
+    from .click import click
     """
     Exports an object to a temporary file and opens it in external program.
 
